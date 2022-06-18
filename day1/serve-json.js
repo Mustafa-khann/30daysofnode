@@ -1,5 +1,4 @@
 var http = require('http')
-import * as fs from {fs};
 
 var host = '127.0.0.1';
 var port = 3000;
