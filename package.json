@@ -1,0 +1,11 @@
+{
+  "name": "30daysofnode",
+  "version": "1.0.0",
+  "description": "This is #30daysofnodechallenge. Progress for everyday will be recorded here.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mustafa-khan",
+  "license": "ISC"
+}
