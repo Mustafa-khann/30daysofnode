@@ -7,11 +7,11 @@ var port = 3000
 
 const server = http.createServer((req,res) => 
 {
-    res.writeHead(200, {'Content-Type': "audio/mp3"});
-    fs.exists('sample.mp3', function(exists) {
+    res.writeHead(200, {'Content-Type': "video/mp4"});
+    fs.exists('sample.mp4', function(exists) {
         if(exists)
         {
-            var rstream = fs.createReadStream('sample.mp3');
+            var rstream = fs.createReadStream('sample.mp4');
             rstream.pipe(res);
         }
         else 
