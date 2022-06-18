@@ -10,7 +10,9 @@ var server = http.createServer((req, res) => {
 });
 
 server.listen(port, host,  (error) => {
+    if(error){
     return console.log("Error Occured", error);
+}
 
     console.log(`Server is running on ${host} : ${port}`);
 })
