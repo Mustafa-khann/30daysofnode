@@ -1,1 +1,1 @@
-This is the content to be wrote to the file.
+I am writing content to the file synchronously!
