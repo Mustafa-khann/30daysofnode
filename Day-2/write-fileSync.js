@@ -8,5 +8,7 @@ fs.writeFileSync('file.txt', content, (err) => {
         throw err
     }
     else
+    {
     console.log("Synchronous writing to the file successful!");
+}
 });
