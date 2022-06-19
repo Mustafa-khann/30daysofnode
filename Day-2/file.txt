@@ -1,2 +1,3 @@
 This is the content to be wrote to the file. 
 This new data will be appended to the file.
+ This is the new data which will be written synchronously appended to the file
