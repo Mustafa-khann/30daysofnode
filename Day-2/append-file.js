@@ -8,6 +8,6 @@ fs.appendFile('file.txt' , new_data, (err)=> {
         throw err;
     }
     else{
-        console.log();
+        console.log("Appendning new data to the file Successful");
     }
 })
