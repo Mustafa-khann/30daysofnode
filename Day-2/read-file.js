@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-fs.readFile('file.txt', (err, data) => {
+fs.readFile('file.txt', 'utf8',(err, data) => {
     if(err)
     {
         throw err;
