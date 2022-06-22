@@ -9,6 +9,5 @@ function nSCallBack(err, data)
         console.log(data);
     }
 }
-
 fs.readFile('file.txt','utf-8' ,nSCallBack);
 fs.readFile('notfile.txt', nSCallBack);
