@@ -14,7 +14,7 @@ function multiplication(x,y){
 }
 
 function division(x,y){
-    var div = x/y;
+    var div = (x/y);
     return div;
 }
 
