@@ -4,6 +4,5 @@ var hmac = crypto.createHmac('sha256','thisismykey');
 
 const data = hmac.update('#30daysofnode', 'utf-8');
 
-gen_hmac = data.digest('hex');
 
-console.log('Hmac: ', gen_hmac);
+console.log('Hmac: ', data.digest('hex'));
