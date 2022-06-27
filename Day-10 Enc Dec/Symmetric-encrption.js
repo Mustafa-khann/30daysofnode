@@ -7,7 +7,6 @@ function encrypt (text)
     crypted += cipher.final('hex');
     return crypted;
 }
-
 function decrypt (text)
 {
     var decipher = crypto.createDecipher(algorithm,password);
@@ -15,11 +14,10 @@ function decrypt (text)
     decipher += decipher.final('utf-8');
     return decrypted;
 }
-
 var text = "This 30daysofnode challenge is amazing. I've learned alot.";
 
-var e = encrypt(text);
-console.log("Encrypted String: ",e);
+var enc = encrypt(text);
+console.log("Encrypted String: ", enc);
 
-var d = decrypt(e);
-console.log("Decrypted String: ",d);
+var dec = decrypt(e);
+console.log("Decrypted String: ", dec);
