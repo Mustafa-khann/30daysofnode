@@ -22,4 +22,4 @@ var e = encrypt(text);
 console.log("Encrypted String: ",e);
 
 var d = decrypt(e);
-console.log("Decrypted String",d);
+console.log("Decrypted String: ",d);
