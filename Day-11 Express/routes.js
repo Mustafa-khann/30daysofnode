@@ -17,3 +17,8 @@ app.get('/logout', (req,res) => {
 app.get('/admin/dashboard', (req,res) => {
     res.send("Demo route for dashboard");
 })
+
+
+app.listen(3000, ()=>{
+    console.log("Server running on port: 3000");
+})
