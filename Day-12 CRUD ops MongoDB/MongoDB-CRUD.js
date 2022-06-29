@@ -7,7 +7,7 @@ async function main(){
     try{
         await client.connect();
         await listDatabases(client);
-        await deleteListingByName(client,"Cozy Cottage");
+        await deleteListingsScrapedBeforeDate(client,new Date("2019-02-15"));
     }
     catch(err){
         throw err;
@@ -119,4 +119,6 @@ async function deleteListingByName(client, nameOfListing){
 async function deleteListingsScrapedBeforeDate(client, date){
     const result = await client.db("sample_airbnb").collection("listingsAndReviews")
     .deleteMany({"last_scraped": {$lt: date}})
+
+    console.log(`${result.deletedCount} document(s) was/were deleted before Date: ${date}`);
 }
