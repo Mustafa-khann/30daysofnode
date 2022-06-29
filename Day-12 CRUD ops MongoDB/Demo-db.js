@@ -7,7 +7,7 @@ async function main(){
     try{
         await client.connect();
         await listDatabases(client);
-        await createMultipleListings(client, await createMultipleListings(client, [
+        await createMultipleListings(client, [
             {
                 name: "Infinite Views",
                 summary: "Modern home with infinite views from the infinity pool",
@@ -30,7 +30,7 @@ async function main(){
                 beds: 7,
                 last_review: new Date()
             }
-        ]));
+        ]);
     }
     catch(err){
         throw err;
@@ -40,9 +40,9 @@ async function main(){
 }
 
 main().catch(console.error);
-
+// CREATE OPERATIONS
 async function createMultipleListings(client, newListings){
-    const result = await client.db("sample_airbnb").collection("listingsAndReviews").insertMany(newListing);
+    const result = await client.db("sample_airbnb").collection("listingsAndReviews").insertMany(newListings);
     console.log(`${result.insertedCount} new listings created with the following ids: `);
     console.log(result.insertedIds);
 }   
@@ -57,4 +57,16 @@ async function listDatabases(client){
     databasesList.databases.forEach(db => {
         console.log(`- ${db.name}`);
     });
+}
+// READ OPERATIONS
+async function findOneListingByName(client, nameOfListing){
+   const result = await client.db("sample_airbnb").collection("listingsAndReviews").findOne({name: nameOfListing});
+
+    if (result) {
+        console.log(`Found a listing with name: ${nameOfListing}`);
+        console.log(result);
+    }
+    else{
+        console.log(`No listings found with the name: ${nameOfListing}`);
+    }
 }
