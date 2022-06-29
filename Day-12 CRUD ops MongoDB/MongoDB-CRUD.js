@@ -7,6 +7,7 @@ async function main(){
     try{
         await client.connect();
         await listDatabases(client);
+        await updateAllListingsToHavePropertyType(client)
     }
     catch(err){
         throw err;
@@ -87,7 +88,7 @@ async function updateListingByName(client, nameOfListing, updatedListing){
         console.log(`${result.modifiedCount} documents was/were updated.`);
 
 }
-
+// Upsert is cOOl
 async function upsertListingByName(client, nameOfListing, updatedListing){
     const result = await client.db("sample_airbnb").collection("listingAndReviews").updateOne({
         name: nameOfListing},{$set: updatedListing}, {upsert: true});
@@ -101,9 +102,10 @@ async function upsertListingByName(client, nameOfListing, updatedListing){
 }
 
 async function updateAllListingsToHavePropertyType(client){
-    const result = client.db("sample_airbnb").collection(listingsAndReviews).updateMany({
-        property_type: {$exists: false}},{ $set: {property_type: "Unknown"}});
+    const result = await client.db("sample_airbnb").collection("listingAndReviews")
+    .updateMany({property_type: {$exists: false}},{ $set: {property_type: "Unknown"}});
 
         console.log(`${result.matchedCount} documents matched the Query Criteria`);
         console.log(`${result.modifiedCount} documents was/were updated`);
     }
+// DELETE OPERATIONS
