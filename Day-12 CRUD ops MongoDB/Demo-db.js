@@ -7,30 +7,9 @@ async function main(){
     try{
         await client.connect();
         await listDatabases(client);
-        await createMultipleListings(client, [
-            {
-                name: "Infinite Views",
-                summary: "Modern home with infinite views from the infinity pool",
-                property_type: "House",
-                bedrooms: 5,
-                bathrooms: 4.5,
-                beds: 5
-            },
-            {
-                name: "Private room in London",
-                property_type: "Apartment",
-                bedrooms: 1,
-                bathroom: 1
-            },
-            {
-                name: "Beautiful Beach House",
-                summary: "Enjoy relaxed beach living in this house with a private beach",
-                bedrooms: 4,
-                bathrooms: 2.5,
-                beds: 7,
-                last_review: new Date()
-            }
-        ]);
+        await updateListingByName(client, "Infinite Views", {
+            bedrooms: 6, bathrooms: 8
+        })
     }
     catch(err){
         throw err;
@@ -69,4 +48,45 @@ async function findOneListingByName(client, nameOfListing){
     else{
         console.log(`No listings found with the name: ${nameOfListing}`);
     }
+}
+async function findListingWithMinimumBedroomsBathroomsAndMostRecentReviews(client, {
+    minimumNumberofBedrooms = 0,
+    minimumNumberofBathrooms = 0,
+    maximumNumberofResults= Number.MAX_SAFE_INTEGER 
+}={})
+{
+    const cursor = await client.db("sample_airbnb").collection("listingsAndReviews").find({
+        bedrooms: { $gte: minimumNumberofBedrooms}, 
+        bathrooms: { $gte: minimumNumberofBathrooms},
+    }).sort({last_review: -1})
+    .limit(maximumNumberofResults);
+
+     const results = await cursor.toArray();
+
+     if (results.length > 0) {
+        console.log(`Found listing(s) with at least ${minimumNumberofBedrooms} bedrooms and ${minimumNumberofBathrooms} bathrooms:`);
+        results.forEach((result, i) => {
+            date = new Date(result.last_review).toDateString();
+
+            console.log();
+            console.log(`${i + 1}. name: ${result.name}`);
+            console.log(`   _id: ${result._id}`);
+            console.log(`   bedrooms: ${result.bedrooms}`);
+            console.log(`   bathrooms: ${result.bathrooms}`);
+            console.log(`   most recent review date: ${new Date(result.last_review).toDateString()}`);
+        });
+    } else {
+        console.log(`No listings found with at least ${minimumNumberofBedrooms} bedrooms and ${minimumNumberofBathrooms} bathrooms`);
+    }
+}
+
+// UPDATING OPERATIONS
+
+async function updateListingByName(client, nameOfListing, updatedListing){
+    const result = await client.db("sample_airbnb").collection("listingAndReviews").updateOne({
+        name: nameOfListing},{$set: updatedListing});
+
+        console.log(`${result.matchedCount} documents(s) matched the Query Criteria`);
+        console.log(`${result.modifiedCount} documents was/were updated.`);
+
 }
