@@ -7,7 +7,6 @@ async function main(){
     try{
         await client.connect();
         await listDatabases(client);
-        await upsertListingByName(client, "Cozy Cottage",{name: "Cozy Cottage", bedrooms: 2, bathrooms: 2})
     }
     catch(err){
         throw err;
@@ -100,3 +99,11 @@ async function upsertListingByName(client, nameOfListing, updatedListing){
             console.log(`${result.modifiedCount} documents was/were updated`);
         }
 }
+
+async function updateAllListingsToHavePropertyType(client){
+    const result = client.db("sample_airbnb").collection(listingsAndReviews).updateMany({
+        property_type: {$exists: false}},{ $set: {property_type: "Unknown"}});
+
+        console.log(`${result.matchedCount} documents matched the Query Criteria`);
+        console.log(`${result.modifiedCount} documents was/were updated`);
+    }
