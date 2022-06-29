@@ -7,9 +7,7 @@ async function main(){
     try{
         await client.connect();
         await listDatabases(client);
-        await updateListingByName(client, "Infinite Views", {
-            bedrooms: 6, bathrooms: 8
-        })
+        await upsertListingByName(client, "Cozy Cottage",{name: "Cozy Cottage", bedrooms: 2, bathrooms: 2})
     }
     catch(err){
         throw err;
@@ -91,7 +89,7 @@ async function updateListingByName(client, nameOfListing, updatedListing){
 
 }
 
-function upsertListingByName(client, nameOfListing, updatedListing){
+async function upsertListingByName(client, nameOfListing, updatedListing){
     const result = await client.db("sample_airbnb").collection("listingAndReviews").updateOne({
         name: nameOfListing},{$set: updatedListing}, {upsert: true});
         
