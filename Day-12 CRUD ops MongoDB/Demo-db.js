@@ -90,3 +90,15 @@ async function updateListingByName(client, nameOfListing, updatedListing){
         console.log(`${result.modifiedCount} documents was/were updated.`);
 
 }
+
+function upsertListingByName(client, nameOfListing, updatedListing){
+    const result = await client.db("sample_airbnb").collection("listingAndReviews").updateOne({
+        name: nameOfListing},{$set: updatedListing}, {upsert: true});
+        
+        console.log(`${result.matchedCount} documents matched the criteria`);
+        if(result.upsertedCount > 0){
+            console.log(`One document was inserted with the id ${result.upsertedCount}`);
+        }else{
+            console.log(`${result.modifiedCount} documents was/were updated`);
+        }
+}
