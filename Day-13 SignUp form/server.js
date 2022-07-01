@@ -36,13 +36,14 @@ app.post('/sign_up', (req,res)=> {
         "password": pass,
         "phone": phone
     }
-    MongoClient.connect(uri , function(error , db){
+    MongoClient.connect(uri , function(error , client){
 		if (error){
 			throw error;
 		}
 		console.log("connected to database successfully");
 		//CREATING A COLLECTION IN MONGODB USING NODE.JS
-		db.collection("details").insertOne(data, (err , collection) => {
+        let database = client.db('databaseName');
+		database.collection("details").insertOne(data, (err , collection) => {
 			if(err) throw err;
 			console.log("Record inserted successfully");
 			console.log(collection);
