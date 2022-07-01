@@ -1,4 +1,5 @@
 const {MongoClient} = require('mongodb');
+
 async function main(){
     const uri = "mongodb://localhost:27017/demo-db";
 
