@@ -1,5 +1,4 @@
 const {MongoClient} = require('mongodb');
-
 async function main(){
     const uri = "mongodb://localhost:27017/demo-db";
 
@@ -15,6 +14,7 @@ async function main(){
         await client.close();
     }
 }
+
 
 main().catch(console.error);
 // CREATE OPERATIONS
