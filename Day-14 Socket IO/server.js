@@ -2,7 +2,7 @@ const { emitWarning } = require('process');
 
 const app = require('express')();
 var server = require('http').Server(app);
-const io = require('socketio')(server);
+const io = require('socket.io')(server);
 server.listen(3000);
 console.log('Server listening on port 3000');
 
