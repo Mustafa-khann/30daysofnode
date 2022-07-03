@@ -17,7 +17,7 @@ mywriteStream.on('finish', ()=>
     console.log('Data written successfully using Streams');
     console.log('Now trying to read the same file using streams');
 
-    var myReadStream = fs.createReadStream(about.txt);
+    var myReadStream = fs.createReadStream('about.txt');
 
     var rContents = '';
 
