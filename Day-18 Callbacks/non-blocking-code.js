@@ -5,13 +5,13 @@ const { start } = require('repl');
 //For calculating execution time
 var date1 = new Date();
 var start_time = date1.getTime();
-console.log("{Check point 1} starting at: " + time_start);
+console.log("{Check point 1} starting at: " + start_time);
 console.log("Let's start reading the file");
 
 // Reading the file
 var filename = 'file.txt';
 
-fs.readFile('output.txt', (err, data) => {
+fs.readFile(filename, (err, data) => {
     if(err)
     {
         throw err;
@@ -25,6 +25,5 @@ fs.readFile('output.txt', (err, data) => {
 const date2 = new Date();
 const end_time = date2.getTime();
 var execution_time = end_time - start_time;
-console.log('Execution time: ', execution_time);
-
+console.log('Execution time: ', execution_time, 'ms');
 
