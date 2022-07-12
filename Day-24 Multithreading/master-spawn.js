@@ -1,4 +1,4 @@
-const cp = require('./slave');
+const cp = require('child_process');
 
 for (let i = 0; i < 6; i++) {
    var worker = cp.spawn('node', ['slave.js', i]);
