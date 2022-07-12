@@ -4,10 +4,10 @@ for (let i = 0; i < 6; i++) {
    var worker = cp.spawn('node', ['slave.js', i]);
 
    worker.stdout.on('data', function (data) {
-       console.log('Value of stdout: ', data);
+       console.log('Value of stdout: ', data.toString());
    });
 
-   worker.sdterr.on('data', function (data){
+   worker.stderr.on('data', function (data){
        console.log('stderr' + data);
    });
 
