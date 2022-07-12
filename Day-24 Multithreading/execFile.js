@@ -1,11 +1,15 @@
-const { version } = require('os');
+const { exec } = require('child_process');
 
-const ef = require('child_process').exec;
+exec('ls -lh', (error, stdout, stderr) => {
+  if (error) {
+    console.error(`error: ${error.message}`);
+    return;
+  }
 
-const child = ef('node', [--version], (err, stdout, stderr) => {
-    if(err){
-        console.log('stderr', stderr);
-        throw err;
-    }
-    console.log('Node js version is ', stdout);
-})
+  if (stderr) {
+    console.error(`stderr: ${stderr}`);
+    return;
+  }
+
+  console.log(`stdout:\n${stdout}`);
+});
