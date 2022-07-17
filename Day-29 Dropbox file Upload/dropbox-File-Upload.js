@@ -1,26 +1,19 @@
-const request = require('request');
-const fs = require('fs');
+const https = require("https");
+const data = "{\"limit\": 1000}";
+const TOKEN = "sl.BLlWZDkPkDZ6tfRw25VVTY6X_-PMwWqeLGoPoe7ePw3Vbrbbihzppg3QOCQp0yb4OCdHob50pmxJN1Ylgxwy1jn3X537JDZN2s_2Heprg0Z3T0zYWUAdX6CXW1Gpx7RuapFu_1o"
+const req = https.request('https://api.dropboxapi.com/2/file_requests/count', {
+	method: 'POST',
+	headers: { 
+		'Authorization': `Bearer ${TOKEN}`,
+	},
+	
+}, (res) => {
+	console.log("statusCode: ", res.statusCode);
+    console.log("headers: ", res.headers);
 
-var access_token = process.env.access_token;
-
-const file_name = 'file.txt';
-
-var content = fs.readFileSync(file_name);
-
-option = {
-    method: "POST",
-    url: 'https://content.dropboxapi.com/2/files/uplaod',
-    header:
-    {
-        "Content-Type": "Application/octet-stream",
-        "Authorization": "Bearer" + access_token,
-        "Dropbox-API-Arg": "{\"path\": \"/Day-29 Dropbox file Upload/"+file_name+"\",\"mode\": \"overwrite\",\"autorename\": true,\"mute\": false}",
-    },
-    body:content
-};
-
-request(option, (err, res, body) => {
-    console.log("Err" + err);
-    console.log("res" + res);
-    console.log("body" + body);
+    res.on('data', function(d) {
+        process.stdout.write(d);
+    });
 })
+
+req.end();
