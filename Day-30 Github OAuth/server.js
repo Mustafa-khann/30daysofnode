@@ -37,6 +37,7 @@ passport.use(new GitHubStrategy({
 ));
 
 app.get('/dashboard', (req, res) => {
+  console.log(req.user);
     res.sendFile(__dirname + '/dashboard.html');
 })
 
@@ -52,7 +53,7 @@ app.get('/api/auth/github',
   passport.authenticate('github', { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect('/');
+    res.redirect('/dashboard');
   });
 
 app.listen(3000, () => {
