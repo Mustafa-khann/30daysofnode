@@ -35,13 +35,24 @@ passport.use(new GitHubStrategy({
     cb(null, profile);
   }
 ));
-
-app.get('/dashboard', (req, res) => {
+const isAuth = ((req,res,next)=>{
+  if(req.user)
+  {
+    next();
+  }
+  else{
+    res.redirect("/login")
+    }
+});
+app.get('/dashboard', isAuth, (req, res) => {
   console.log(req.user);
     res.sendFile(__dirname + '/dashboard.html');
 })
 
 app.get('/login', (req, res) => {
+  if(req.user){
+    return res.redirect('/dashboard')
+  }
     res.sendFile(__dirname + '/login.html');
 
 })
