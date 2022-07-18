@@ -54,7 +54,6 @@ app.get('/login', (req, res) => {
     return res.redirect('/dashboard')
   }
     res.sendFile(__dirname + '/login.html');
-
 })
 // auth
 app.get('/auth/github',
