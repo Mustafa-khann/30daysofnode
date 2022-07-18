@@ -9,7 +9,9 @@ app.use(session({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: false,
-  cookie: { secure: true }
+  cookie: { 
+    httpOnly: true,
+   }
 }))
 
 app.use(passport.initialize());
