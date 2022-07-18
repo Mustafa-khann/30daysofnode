@@ -3,11 +3,11 @@ const app = express();
 
 
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.send(__dirname + '/dashboard.html')
 })
 
 app.get('/login', (req, res) => {
-    
+
 })
 
 app.listen(3000, () => {
