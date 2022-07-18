@@ -2,8 +2,18 @@ const express = require('express');
 const app = express();
 const passport = require('passport');
 const GitHubStrategy = require('passport-github').Strategy;
+const session = require('express-session');
+
+
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}))
 
 app.use(passport.initialize());
+app.use(passport.session());
 
 passport.serializeUser((user, cb)=>{
   cb(null, user.id);
