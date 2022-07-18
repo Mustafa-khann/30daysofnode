@@ -55,6 +55,10 @@ app.get('/login', (req, res) => {
   }
     res.sendFile(__dirname + '/login.html');
 })
+app.get('/logout', (req, res) => {
+  req.logOut();
+    res.redirect('/login');
+})
 // auth
 app.get('/auth/github',
   passport.authenticate('github', { scope: [ 'user:email' ] }));
