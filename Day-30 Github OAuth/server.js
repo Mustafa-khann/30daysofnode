@@ -3,10 +3,11 @@ const app = express();
 
 
 app.get('/', (req, res) => {
-    res.send(__dirname + '/dashboard.html')
+    res.send(__dirname + '/dashboard.html');
 })
 
 app.get('/login', (req, res) => {
+    res.send(__dirname + '/login');
 
 })
 
